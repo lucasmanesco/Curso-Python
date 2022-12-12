@@ -6,13 +6,18 @@ escreva "Seu nome é curto"; se tiver entre 5 e 6 letras, escreva
 
 nome = input('Olá! Digite o seu nome: ')
 
-curto = len(nome) <= 4
-normal = len(nome) >= 5 and len(nome) <= 6
-grande = len(nome) >= 6
+if nome and nome.isnumeric() == False:
 
-if curto:
-    print('Seu nome é curto!')
-elif normal:
-    print('Seu nome é normal!')
-elif grande:
-    print('Seu nome é grande!')
+    curto = len(nome) <= 4
+    normal = len(nome) >= 5 and len(nome) <= 6
+    grande = len(nome) >= 6
+
+    if curto:
+        print('Seu nome é curto!')
+    elif normal:
+        print('Seu nome é normal!')
+    elif grande:
+        print('Seu nome é grande!')
+        
+else:
+    print('Você não digitou seu nome corretamente.')
