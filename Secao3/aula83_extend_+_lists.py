@@ -7,22 +7,10 @@ Métodos úteis: append, insert, pop, del, clear, extend, +
 Create Read Update Delete
 Criar, ler, alterar, apagar = lista[i] (CRUD)
 """
-#        0   1   2   3   4
-lista = [10, 20, 30, 40, 50]
-print(lista)
 
-lista.append('Lucas')
-print(lista)
-
-nome = lista.pop()
-lista.append(100)
-print(lista)
-
-del lista [-1]
-print(lista)
-
-# lista.clear()
-# print(lista)
-
-lista.insert(0, 5)
-print(lista)
+lista_a = [1,2,3]
+lista_b = [4,5,6]
+lista_c = lista_a + lista_b
+lista_a.extend(lista_b)
+print(lista_c)
+print(lista_a)
