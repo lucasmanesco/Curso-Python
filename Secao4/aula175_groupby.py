@@ -1,4 +1,7 @@
 # groupby - agrupando valores (itertools)
+# dados precisam estar ordenados para agrupar corretamente
+
+from itertools import groupby
 
 alunos = [
     {'nome': 'Luiz', 'nota': 'A'},
@@ -11,3 +14,16 @@ alunos = [
     {'nome': 'André', 'nota': 'A'},
     {'nome': 'Anderson', 'nota': 'C'},
 ]
+
+
+def ordena(aluno):
+    return aluno['nota']
+
+
+alunos_agrupados = sorted(alunos, key=ordena)
+grupos = groupby(alunos_agrupados, key=ordena)
+
+for chave, grupo in grupos:
+    print(chave)
+    for aluno in grupo:
+        print(aluno)
