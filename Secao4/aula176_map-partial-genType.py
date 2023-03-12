@@ -2,6 +2,7 @@
 
 from functools import partial
 
+
 def print_iter(iterator):
     print(*list(iterator), sep='\n')
     print()
@@ -43,13 +44,13 @@ print_iter(produtos)
 print_iter(novos_produtos)
 
 print(novos_produtos)
-print(hasattr,(novos_produtos, '__iter__'))
-print(hasattr,(novos_produtos, '__next__'))
+print(hasattr, (novos_produtos, '__iter__'))
+print(hasattr, (novos_produtos, '__next__'))
 
 print(list(novos_produtos))
 
 print(list(map(
-    lambda x: x*3, 
+    lambda x: x*3,
     [1, 2, 3, 4]
         )
     )
