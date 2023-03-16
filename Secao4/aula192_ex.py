@@ -9,50 +9,64 @@ desfazer = ['fazer café',] -> Refazer ['caminhar']
 desfazer = [] -> Refazer ['caminhar', 'fazer café']
 refazer = todo ['fazer café']
 refazer = todo ['fazer café', 'caminhar']
-
-*Rubber Duck Debugging
+*Rubber Duck Debugging*
 """
 
 
-def listar(lista):
-    print(*lista, sep='\n')
+def listit(l):
+    if not l:
+        print('No list to show.')
+        return
+    print('Tasks:')
+    print(*l, sep='\n')
 
 
-def adicionar(item, lista):
-    lista.append(item)
-    return lista
+def add(item, l):
+    l.append(item)
+    return l
 
 
-def desfazer():
-    ...
-
-
-def refazer():
-    ...
+def undo(l, lr):
+    if not l:
+        print('No action to do.')
+        return
+    removed = l.pop()
+    lr.append(removed)
 
 
 if __name__ == '__main__':
-    print('To-Do List\n' 'Comandos: Listar / Desfazer / Refazer / Sair\n')
-    todo = []
+    print('To-Do List\n' 'Commands: List / Undo / Redo / Exit\n')
+    to_do = []
+    to_do_r = []
 
     while True:
-        comando = input('Digite uma tarefa/comando: ')
+        command = input('Type a task or command: ')
         print()
 
-        if comando.lower() == 'listar':
-            listar(todo)
+        if command.lower() == 'list':
+            listit(to_do)
             print()
-        elif comando.lower() == 'desfazer':
-            desfazer()
-            listar(todo)
+
+        elif command.lower() == 'undo':
+            undo(to_do, to_do_r)
+            listit(to_do)
             print()
-        elif comando.lower() == 'refazer':
-            refazer()
-            listar(todo)
+
+        elif command.lower() == 'redo':
+            undo(to_do_r, to_do)
+            listit(to_do)
             print()
-        elif comando.lower() == 'sair':
+
+        elif command.lower() == 'exit':
             break
-        else:
-            adicionar(comando, todo)
-            listar(todo)
+
+        elif command == '':
+            print('You must type something.')
             print()
+
+        else:
+            add(command, to_do)
+            listit(to_do)
+            print()
+
+print('Tks for using. =)')
