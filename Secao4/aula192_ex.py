@@ -13,6 +13,7 @@ refazer = todo ['fazer café', 'caminhar']
 """
 import os
 
+
 def listit(l):
     # guard clause
     if not l:
