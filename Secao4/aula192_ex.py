@@ -14,6 +14,7 @@ refazer = todo ['fazer café', 'caminhar']
 
 
 def listit(l):
+    # guard clause
     if not l:
         print('No list to show.')
         return
@@ -27,6 +28,7 @@ def add(item, l):
 
 
 def undo(l, lr):
+    # guard clause
     if not l:
         print('No action to do.')
         return
