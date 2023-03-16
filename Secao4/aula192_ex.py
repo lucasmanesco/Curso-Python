@@ -11,7 +11,7 @@ refazer = todo ['fazer café']
 refazer = todo ['fazer café', 'caminhar']
 *Rubber Duck Debugging*
 """
-
+import os
 
 def listit(l):
     # guard clause
@@ -62,6 +62,9 @@ if __name__ == '__main__':
         elif command.lower() == 'exit':
             break
 
+        elif command.lower() == 'clear':
+            os.system('cls')
+            
         elif command == '':
             print('You must type something.')
             print()
