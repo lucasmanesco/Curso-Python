@@ -14,26 +14,26 @@ refazer = todo ['fazer café', 'caminhar']
 import os
 
 
-def listit(l):
+def listit(l1):
     # guard clause
-    if not l:
+    if not l1:
         print('No list to show.')
         return
     print('Tasks:')
-    print(*l, sep='\n')
+    print(*l1, sep='\n')
 
 
-def add(item, l):
-    l.append(item)
-    return l
+def add(item, l1):
+    l1.append(item)
+    return l1
 
 
-def undo(l, lr):
+def undo(l1, lr):
     # guard clause
-    if not l:
+    if not l1:
         print('No action to do.')
         return
-    removed = l.pop()
+    removed = l1.pop()
     lr.append(removed)
 
 
@@ -65,7 +65,7 @@ if __name__ == '__main__':
 
         elif command.lower() == 'clear':
             os.system('cls')
-            
+
         elif command == '':
             print('You must type something.')
             print()

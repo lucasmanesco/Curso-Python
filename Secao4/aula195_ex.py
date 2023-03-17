@@ -15,51 +15,50 @@ import os
 import json
 
 
-def listit(l):
+def listit(l1):
     # guard clause
-    if not l:
+    if not l1:
         print('No list to show.')
         return
     print('Tasks:')
-    print(*l, sep='\n')
+    print(*l1, sep='\n')
 
 
-def add(item, l):
-    l.append(item)
-    return l
+def add(item, l1):
+    l1.append(item)
+    return l1
 
 
-def undo(l, lr):
+def undo(l1, lr):
     # guard clause
-    if not l:
+    if not l1:
         print('No action to do.')
         return
-    removed = l.pop()
+    removed = l1.pop()
     lr.append(removed)
 
 
-def read(l, file_path):
-    data = []
+def read(l1, file_path):
+    dados = []
     try:
-        with open(file_path, 'r', encoding='utf8') as file:
-            data = json.load(file)
+        with open(file_path, 'r', encoding='utf-8') as file:
+            dados = json.load(file)
     except FileNotFoundError:
-        print('List file not found. Creating...')
-        save(l, file_path)
-    return data
+        print('File does not exist. Creating...')
+        save(l1, file_path)
+    return dados
 
 
-def save(l, file_path):
-    data = l
-    with open(file_path, 'w', encoding='utf8') as file:
-        data = json.dump(l, file, ensure_ascii=False, indent=2)
-    return data
+def save(l1, file_path):
+    dados = l1
+    with open(file_path, 'w', encoding='utf-8') as file:
+        dados = json.dump(l1, file, indent=2, ensure_ascii=False)
+    return dados
 
 
-FILE_PATH = 'aula195-to_do_list.json'
+FILE_PATH = 'aula195-to-do-list.json'
 to_do = read([], FILE_PATH)
 to_do_r = []
-
 print('To-Do List\n' 'Commands: List / Undo / Redo / Exit\n')
 
 while True:
@@ -85,7 +84,7 @@ while True:
 
     elif command.lower() == 'clear':
         os.system('cls')
-        
+
     elif command == '':
         print('You must type something.')
         print()
