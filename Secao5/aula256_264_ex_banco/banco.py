@@ -1,0 +1,3 @@
+class Banco():
+    def autenticar(self):
+        ...
