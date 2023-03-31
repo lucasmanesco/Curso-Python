@@ -52,6 +52,8 @@ class Banco():
         attrs = f'({self.agencias!r}, {self.clientes!r}, {self.contas!r})'
         return f'{class_name}{attrs}'
 
+# --------------------------------------------------------------------------- #
+
 
 if __name__ == '__main__':
 
