@@ -9,15 +9,20 @@ TABLE_NAME = 'customers'
 con = sqlite3.connect(DB_FILE)
 cursor = con.cursor()
 
+# CRUD - Create Read   Update Delete
+# SQL  - INSERT SELECT UPDATE DELETE
+
 # CUIDADO: fazendo delete sem where -------------------------------------------
 cursor.execute(
     f'DELETE FROM {TABLE_NAME}'
 )
 con.commit()
 
+# DELETE com where (cuidadoso) ------------------------------------------------
 cursor.execute(
     f'DELETE FROM sqlite_sequence WHERE name="{TABLE_NAME}"'
 )
+con.commit()
 
 # criando tabela --------------------------------------------------------------
 cursor.execute(
@@ -32,12 +37,12 @@ con.commit()
 
 # registrar valores nas colunas da tabela -------------------------------------
 # CUIDADO: sql injection
-# cursor.execute(
-#     f'INSERT INTO {TABLE_NAME} (id, name, weight) '
-#     'VALUES '
-#     '(NULL, "Lucas Manesco", 67.5), (NULL, "Jéssica Sousa", 58.5'
-# )
-# con.commit()
+cursor.execute(
+    f'INSERT INTO {TABLE_NAME} (id, name, weight) '
+    'VALUES '
+    '(NULL, "Lucas Manesco", 67.5), (NULL, "Jéssica Sousa", 58.5'
+)
+con.commit()
 
 # registrar com executemany ---------------------------------------------------
 sql = (
@@ -83,6 +88,14 @@ cursor.executemany(sql, (
 ))
 con.commit()
 print(sql)
+
+# UPDATE com SET e WHERE
+cursor.execute(
+    f'UPDATE {TABLE_NAME} '
+    'SET name="QUALQUER", weight=67.89 '
+    'WHERE id = "1"'
+)
+con.commit()
 
 # fechar ----------------------------------------------------------------------
 cursor.close()
