@@ -3,12 +3,14 @@
 # Pypy: https://pypi.org/project/pymysql/
 # GitHub: https://github.com/PyMySQL/PyMySQL
 import os
+from typing import cast
 
 import dotenv
 import pymysql
 import pymysql.cursors
 
 TABLE_NAME = 'customers'
+CURRENT_CURSOR = pymysql.cursors.DictCursor
 
 dotenv.load_dotenv()
 
@@ -18,7 +20,7 @@ connection = pymysql.connect(
     password=os.environ['MYSQL_PASSWORD'],
     database=os.environ['MYSQL_DATABASE'],
     charset='utf8mb4',
-    cursorclass=pymysql.cursors.DictCursor,  # Cursor para retornar dicionários
+    cursorclass=CURRENT_CURSOR,
 )
 
 # -----------------------------------------------------------------------------#
@@ -178,17 +180,36 @@ with connection:
 # UPDATE (UPDATE SEM WHERE É PERIGOSO!)
 
     with connection.cursor() as cursor:
+        cursor = cast(CURRENT_CURSOR, cursor)
         sql = (
             f'UPDATE {TABLE_NAME} '
             'SET nome=%s, idade=%s, '
             'WHERE id = %s'
         )
         cursor.execute(sql, ('Carlos', 20, 1,))
-        connection.commit()
+        resultFromSelect = cursor.execute(
+            f'SELECT * FROM {TABLE_NAME} ')  # type: ignore
 
-        cursor.execute(f'SELECT * FROM {TABLE_NAME} ')  # type: ignore
+        data6 = cursor.fetchall()
 
-        for row in cursor.fetchall():
+        for row in data6:
             print(row)
 
+        print('resultFromSelect', resultFromSelect)
+        print('len(data6)', len(data6))
+        print('rowcount', cursor.rowcount)
+
+        sql = (
+            f'INSERT INTO {TABLE_NAME} '
+            '(nome, idade) '
+            'VALUES '
+            '(%s, %s) '
+        )
+        data1 = ('Lucas', 28)
+        result = cursor.execute(sql, data1)
+
+        print('lastrowid', cursor.lastrowid)
+        print('rownumber', cursor.rownumber)
+
+    connection.commit()
 # -----------------------------------------------------------------------------#
